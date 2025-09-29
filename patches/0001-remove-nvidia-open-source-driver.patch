@@ -1,0 +1,24 @@
+From ca44cb5005d7fdc14e0e0e9ac933593392b36892 Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?=E5=91=A8=E6=B8=B8?= <hi@zhouyou.info>
+Date: Tue, 30 Sep 2025 04:45:30 +0800
+Subject: [PATCH] remove nvidia open source driver
+
+---
+ scale_build/extensions.py | 1 -
+ 1 file changed, 1 deletion(-)
+
+diff --git a/scale_build/extensions.py b/scale_build/extensions.py
+index 91254fc..35d24fd 100644
+--- a/scale_build/extensions.py
++++ b/scale_build/extensions.py
+@@ -173,7 +173,6 @@ class NvidiaExtension(Extension):
+                 f"--kernel-name={kernel_version}",
+                 "--allow-installation-with-running-driver",
+                 "--no-rebuild-initramfs",
+-                "--kernel-module-type=open"
+             ]
+         )
+ 
+-- 
+2.51.0
+
