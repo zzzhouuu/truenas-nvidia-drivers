@@ -23,7 +23,7 @@ systemd-sysext unmerge
 ```
 
 ```shell
-zfs set readonly=off boot-pool/ROOT/25.10-BETA.1/usr
+zfs set readonly=off boot-pool/ROOT/25.10.0/usr
 ```
 
 Overwrite it!
@@ -35,7 +35,7 @@ cp nvidia.raw /usr/share/truenas/sysext-extensions/nvidia.raw
 Then, set the /usr dataset back to read-only:
 
 ```shell
-zfs set readonly=on boot-pool/ROOT/25.10-BETA.1/usr
+zfs set readonly=on boot-pool/ROOT/25.10.0/usr
 ```
 
 After you’ve copied the file, simply run:
