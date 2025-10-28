@@ -16,6 +16,12 @@ You’ll need to replace the nvidia.raw file on your running TrueNAS system at /
 
 First, you need to make the /usr dataset writable:
 
+If you checked Install NVIDIA Drivers on the settings panel
+
+```shell
+systemd-sysext unmerge
+```
+
 ```shell
 zfs set readonly=off boot-pool/ROOT/25.10-BETA.1/usr
 ```
