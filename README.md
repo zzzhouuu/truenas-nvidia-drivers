@@ -1,6 +1,6 @@
 # TrueNAS 25.10 Nvidia GPU Driver
 
-*Tip:* This repository uses Git LFS. Please navigate to the corresponding version folder and click the file to download the raw file; do not download the current repository’s zip archive via the Code button.
+*`Tip: This repository uses Git LFS. Please navigate to the corresponding version folder and click the file to download the raw file; do not download the current repository’s zip archive via the Code button.`*
 
 TrueNAS 25.10 now uses the NVIDIA open GPU kernel modules with the 570.172.08 driver. This enables TrueNAS to make use of NVIDIA Blackwell GPUs - the RTX 50-series and RTX PRO Blackwell cards - which many users have requested support for.
 
@@ -16,31 +16,31 @@ This is to modify the official build parameters to remove the use of open GPU ke
 
 You’ll need to replace the nvidia.raw file on your running TrueNAS system at /usr/share/truenas/sysext-extensions/nvidia.raw with the one you just compiled.
 
-First, you need to make the /usr dataset writable:
-
-If you checked Install NVIDIA Drivers on the settings panel
+### 1. If you checked Install NVIDIA Drivers on the settings panel
 
 ```shell
 systemd-sysext unmerge
 ```
 
+### 2. You need to make the /usr dataset writable
+
 ```shell
-zfs set readonly=off boot-pool/ROOT/25.10.0/usr
+zfs set readonly=off "$(zfs list -H -o name /usr)"
 ```
 
-Overwrite it!
+### 3. Overwrite it
 
 ```shell
 cp nvidia.raw /usr/share/truenas/sysext-extensions/nvidia.raw
 ```
 
-Then, set the /usr dataset back to read-only:
+### 4. Then, set the /usr dataset back to read-only
 
 ```shell
-zfs set readonly=on boot-pool/ROOT/25.10.0/usr
+zfs set readonly=on "$(zfs list -H -o name /usr)"
 ```
 
-After you’ve copied the file, simply run:
+### 5. After you’ve copied the file, simply run
 
 ```shell
 systemd-sysext merge
