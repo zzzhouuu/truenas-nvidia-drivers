@@ -1,5 +1,7 @@
 # TrueNAS 25.10 Nvidia GPU Driver
 
+*Tip:* This repository uses Git LFS. Please navigate to the corresponding version folder and click the file to download the raw file; do not download the current repository’s zip archive via the Code button.
+
 TrueNAS 25.10 now uses the NVIDIA open GPU kernel modules with the 570.172.08 driver. This enables TrueNAS to make use of NVIDIA Blackwell GPUs - the RTX 50-series and RTX PRO Blackwell cards - which many users have requested support for.
 
 Unfortunately, what NVIDIA giveth, NVIDIA taketh away.
