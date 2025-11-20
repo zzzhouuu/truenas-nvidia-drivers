@@ -1,4 +1,4 @@
-version="25.10.0"
+version="25.10.0.1"
 
 # disable nvidia support temporarily
 midclt call docker.update '{"nvidia": false}'
