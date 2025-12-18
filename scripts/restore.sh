@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-version="25.10.0"
-
 # disable nvidia support temporarily
 midclt call docker.update '{"nvidia": false}'
 
