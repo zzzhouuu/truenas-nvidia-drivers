@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 version="25.10.1"
 
 # disable nvidia support temporarily
