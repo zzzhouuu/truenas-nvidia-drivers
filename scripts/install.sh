@@ -12,6 +12,7 @@ if echo "${sha256}  /tmp/nvidia.raw" | sha256sum -c -; then
 
   # disable nvidia support temporarily
   midclt call docker.update '{"nvidia": false}'
+  systemd-sysext unmerge
 
   # install nvidia raw file
   zfs set readonly=off "$(zfs list -H -o name /usr)"
