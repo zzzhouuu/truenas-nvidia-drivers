@@ -2,6 +2,7 @@
 
 # disable nvidia support temporarily
 midclt call docker.update '{"nvidia": false}'
+systemd-sysext unmerge
 
 # restore nvidia raw file
 zfs set readonly=off "$(zfs list -H -o name /usr)"
