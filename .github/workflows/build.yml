@@ -1,0 +1,88 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          submodules: true
+
+      - name: Install Dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential debootstrap git python3-pip python3-venv squashfs-tools unzip libjson-perl rsync libarchive-tools
+
+      - name: Set Train Info
+        id: train
+        run: |
+          echo "TRAIN=$(cat train)" >> $GITHUB_OUTPUT
+
+      - name: Set Version Info
+        id: version
+        run: |
+          echo "VERSION=$(cat version)" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        run: |
+          cd scale-build
+          make checkout
+
+      - name: Apply Patches
+        run: |
+          cd scale-build
+          git apply ../patches/0001-remove-nvidia-open-source-driver.patch
+
+      - name: Build Packages
+        run: |
+          cd scale-build
+          sudo make packages
+
+      - name: Build Update
+        run: |
+          export TRUENAS_TRAIN="TrueNAS-SCALE-${{ steps.train.outputs.TRAIN }}"
+          export TRUENAS_VERSION=${{ steps.version.outputs.VERSION }}
+          echo "Build Train: $TRUENAS_TRAIN"
+          echo "Build Version: $TRUENAS_VERSION"
+          cd scale-build
+          sudo make update
+
+      - name: Extract Nvidia Extension
+        run: |
+          cd scale-build
+          mkdir -p ./tmpfile/rootfs
+          sudo mount ./tmp/update/rootfs.squashfs ./tmpfile/rootfs
+          cp ./tmpfile/rootfs/usr/share/truenas/sysext-extensions/nvidia.raw ./tmp/release/extensions/nvidia.raw
+          sudo umount ./tmpfile/rootfs
+
+      - name: Artifacts
+        run: |
+          mkdir -p artifacts/packages
+          mv scale-build/tmp/release/* artifacts/
+          cp -r scale-build/tmp/pkgdir/* artifacts/packages/
+
+      - name: Upload Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: truenas-artifacts
+          path: |
+            artifacts/TrueNAS-SCALE-**.update
+            artifacts/TrueNAS-SCALE-**.update.sha256
+            artifacts/extensions/nvidia.raw
+            artifacts/manifest.json
+
+      - name: Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: "${{ steps.version.outputs.VERSION }}"
+          body: "Automated release of TrueNAS SCALE ${{ steps.train.outputs.TRAIN }} ${{ steps.version.outputs.VERSION }}"
+          token: ${{ secrets.TOKEN }}
+          files: |
+            artifacts/TrueNAS-SCALE-**.update
+            artifacts/TrueNAS-SCALE-**.update.sha256
+            artifacts/extensions/nvidia.raw
+            artifacts/manifest.json

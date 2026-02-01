@@ -1,0 +1,89 @@
+version: 44
+jobs:
+- name: CI
+  steps:
+  - type: CheckoutStep
+    name: 签出
+    cloneCredential:
+      type: DefaultCredential
+    withLfs: false
+    withSubmodules: true
+    condition: SUCCESSFUL
+    optional: false
+  - type: SetBuildVersionStep
+    name: 版本
+    buildVersion: '@file:version@'
+    condition: SUCCESSFUL
+    optional: false
+  - type: CommandStep
+    name: 构建
+    runInContainer: true
+    image: debian:bookworm
+    interpreter:
+      type: DefaultInterpreter
+      commands: |
+        projectDir=`pwd`
+
+        # 用于检查上一个命令是否成功执行
+        check_status() {
+            local last_status=$?
+            local step_name=$1
+            if [ $last_status -ne 0 ]; then
+                echo "错误：步骤 '$step_name' 执行失败，退出码为 $last_status。停止构建。" >&2
+                exit $last_status
+            else
+                echo "步骤 '$step_name' 执行成功。"
+            fi
+        }
+
+        echo "Install Dependencies"
+        apt update && apt install -y build-essential debootstrap git python3-pip python3-venv squashfs-tools unzip libjson-perl rsync libarchive-tools
+
+        cd scale-build
+
+        echo "Checkout Sources"
+        make checkout
+
+        echo "Patches Sources"
+        git apply $projectDir/patches/0001-remove-nvidia-open-source-driver.patch
+
+        echo "Configure Environment Variables"
+        export TRUENAS_TRAIN="TrueNAS-SCALE-$(cat $projectDir/train)"
+        export TRUENAS_VERSION=$(cat $projectDir/version)
+        echo "Build Train: $TRUENAS_TRAIN"
+        echo "Build Version: $TRUENAS_VERSION"
+
+        echo "Build Packages"
+        make packages
+        check_status "make packages"
+
+        echo "Build Update"
+        make update
+        check_status "make update"
+
+        echo "Extract Nvidia Extension"
+        if [ ! -f ./tmp/update/rootfs.squashfs ]; then
+            echo "错误: 文件 ./tmp/update/rootfs.squashfs 不存在。停止构建。" >&2
+            exit 1
+        fi
+        mkdir -p ./tmpfile/rootfs
+        mount ./tmp/update/rootfs.squashfs ./tmpfile/rootfs
+        cp ./tmpfile/rootfs/usr/share/truenas/sysext-extensions/nvidia.raw ./tmp/release/extensions/nvidia.raw
+
+        echo "Artifacts"
+        mkdir -p $projectDir/artifacts/packages
+        mv ./tmp/release/* $projectDir/artifacts/
+        cp ./tmp/pkgdir/* $projectDir/artifacts/packages/
+    useTTY: true
+    condition: SUCCESSFUL
+    optional: false
+  - type: PublishArtifactStep
+    name: 发布
+    sourcePath: artifacts
+    artifacts: TrueNAS-SCALE-**.update TrueNAS-SCALE-**.update.sha256 extensions/nvidia.raw manifest.json
+    condition: SUCCESSFUL
+    optional: false
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 21600
