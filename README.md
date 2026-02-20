@@ -17,6 +17,32 @@ systemctl restart docker
 
 - remove nvidia open source kernel module
 
+## Artifacts
+
+The build artifacts have been uploaded to the Cloudflare R2 storage. Public access link: [truenas-drivers](https://truenas-drivers.zhouyou.info)
+
+example:
+
+[25.10.1/nvidia.raw](https://truenas-drivers.zhouyou.info/25.10.1/nvidia.raw)
+
+[25.10.2/nvidia.raw](https://truenas-drivers.zhouyou.info/25.10.2/nvidia.raw)
+
+### tree structure of the artifacts
+
+.
+├── 25.10.1
+│   ├── build.log
+│   ├── manifest.json
+│   ├── nvidia.raw
+│   ├── TrueNAS-SCALE-25.10.1.update
+│   └── TrueNAS-SCALE-25.10.1.update.sha256
+├── 25.10.2
+│   ├── build.log
+│   ├── manifest.json
+│   ├── nvidia.raw
+│   ├── TrueNAS-SCALE-25.10.2.update
+│   └── TrueNAS-SCALE-25.10.2.update.sha256
+
 ## Reference
 
 - [TrueNAS Build Nvidia vGPU Driver extensions (systemd-sysext)](https://www.homelabproject.cc/posts/truenas/truenas-build-nvidia-vgpu-driver-extensions-systemd-sysext/)
