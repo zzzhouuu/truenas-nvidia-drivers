@@ -19,7 +19,7 @@ systemctl restart docker
 
 ## Artifacts
 
-The build artifacts have been uploaded to the Cloudflare R2 storage. Public access link: [truenas-drivers](https://truenas-drivers.zhouyou.info)
+The build artifacts have been uploaded to the Cloudflare R2 storage. Public access link: [truenas-drivers](https://truenas-drivers.zhouyou.info/index.html)
 
 example:
 
