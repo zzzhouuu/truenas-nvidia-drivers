@@ -87,3 +87,20 @@ jobs:
   maxRetries: 3
   retryDelay: 30
   timeout: 21600
+- name: Sync Main (GitHub)
+  steps:
+  - type: PushRepository
+    name: sync
+    remoteUrl: https://github.com/zzzhouuu/truenas-nvidia-drivers.git
+    userName: zzzhouuu
+    passwordSecret: github
+    force: false
+    condition: SUCCESSFUL
+    optional: false
+  triggers:
+  - type: BranchUpdateTrigger
+    userMatch: anyone
+  retryCondition: never
+  maxRetries: 3
+  retryDelay: 30
+  timeout: 14400
