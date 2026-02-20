@@ -23,9 +23,13 @@ The build artifacts have been uploaded to the Cloudflare R2 storage. Public acce
 
 example:
 
-[25.10.1/nvidia.raw](https://truenas-drivers.zhouyou.info/25.10.1/nvidia.raw)
+```shell
+# 25.10.1
+wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.1/nvidia.raw
 
-[25.10.2/nvidia.raw](https://truenas-drivers.zhouyou.info/25.10.2/nvidia.raw)
+# 25.10.2
+wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.2/nvidia.raw
+```
 
 ### tree structure of the artifacts
 
