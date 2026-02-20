@@ -29,6 +29,7 @@ example:
 
 ### tree structure of the artifacts
 
+```shell
 .
 ├── 25.10.1
 │   ├── build.log
@@ -42,6 +43,7 @@ example:
 │   ├── nvidia.raw
 │   ├── TrueNAS-SCALE-25.10.2.update
 │   └── TrueNAS-SCALE-25.10.2.update.sha256
+```
 
 ## Reference
 
