@@ -74,13 +74,15 @@ jobs:
         mkdir -p $projectDir/artifacts/packages
         mv ./tmp/release/* $projectDir/artifacts/
         cp ./tmp/pkgdir/* $projectDir/artifacts/packages/
+
+        sha256sum $projectDir/artifacts/extensions/nvidia.raw | awk '{print $1}' > $projectDir/artifacts/extensions/nvidia.raw.sha256
     useTTY: true
     condition: SUCCESSFUL
     optional: false
   - type: PublishArtifactStep
     name: 发布
     sourcePath: artifacts
-    artifacts: TrueNAS-SCALE-**.update TrueNAS-SCALE-**.update.sha256 extensions/nvidia.raw manifest.json
+    artifacts: TrueNAS-SCALE-**.update TrueNAS-SCALE-**.update.sha256 extensions/nvidia.raw extensions/nvidia.raw.sha256 manifest.json
     condition: SUCCESSFUL
     optional: false
   retryCondition: never
