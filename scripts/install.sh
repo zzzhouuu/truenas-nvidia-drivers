@@ -36,8 +36,13 @@ wget -q --show-progress -O "${sha256_file}" "${base_url}/nvidia.raw.sha256"
 
 # verify the downloaded file
 echo "Verifying SHA256 checksum..."
-if ! sha256sum -c "${sha256_file}"; then
+expected_hash=$(tr -d '\n\r ' < "${sha256_file}")
+actual_hash=$(sha256sum "${raw_file}" | awk '{print $1}')
+
+if [[ "${expected_hash}" != "${actual_hash}" ]]; then
     echo "ERROR: SHA256 checksum verification failed!" >&2
+    echo "Expected: ${expected_hash}" >&2
+    echo "Actual:   ${actual_hash}" >&2
     exit 1
 fi
 
