@@ -58,6 +58,13 @@ wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.2/nvidia.raw
 │   ├── nvidia.raw.sha256
 │   ├── TrueNAS-SCALE-25.10.2.1.update
 │   └── TrueNAS-SCALE-25.10.2.1.update.sha256
+├── 25.10.3
+│   ├── TrueNAS-SCALE-25.10.3.update
+│   ├── TrueNAS-SCALE-25.10.3.update.sha256
+│   ├── build.log
+│   ├── manifest.json
+│   ├── nvidia.raw
+│   └── nvidia.raw.sha256
 ```
 
 ## Reference
