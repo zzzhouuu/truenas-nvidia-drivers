@@ -38,31 +38,29 @@ wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.2/nvidia.raw
 ```shell
 .
 ├── 25.10.1
-│   ├── build.log
-│   ├── manifest.json
-│   ├── nvidia.raw
-│   ├── nvidia.raw.sha256
-│   ├── TrueNAS-SCALE-25.10.1.update
-│   └── TrueNAS-SCALE-25.10.1.update.sha256
-├── 25.10.2
-│   ├── build.log
-│   ├── manifest.json
-│   ├── nvidia.raw
-│   ├── nvidia.raw.sha256
-│   ├── TrueNAS-SCALE-25.10.2.update
-│   └── TrueNAS-SCALE-25.10.2.update.sha256
+│   ├── TrueNAS-SCALE-25.10.1.update
+│   ├── TrueNAS-SCALE-25.10.1.update.sha256
+│   ├── build.log
+│   ├── manifest.json
+│   ├── nvidia.raw
+│   └── nvidia.raw.sha256
 ├── 25.10.2.1
-│   ├── build.log
-│   ├── manifest.json
-│   ├── nvidia.raw
-│   ├── nvidia.raw.sha256
-│   ├── TrueNAS-SCALE-25.10.2.1.update
-│   └── TrueNAS-SCALE-25.10.2.1.update.sha256
+│   ├── TrueNAS-SCALE-25.10.2.1.update
+│   ├── TrueNAS-SCALE-25.10.2.1.update.sha256
+│   ├── build.log
+│   ├── manifest.json
+│   ├── nvidia.raw
+│   └── nvidia.raw.sha256
 ├── 25.10.3
 │   ├── TrueNAS-SCALE-25.10.3.update
 │   ├── TrueNAS-SCALE-25.10.3.update.sha256
 │   ├── build.log
 │   ├── manifest.json
+│   ├── nvidia.raw
+│   └── nvidia.raw.sha256
+├── 26.0.0-BETA.1
+│   ├── TrueNAS-26.0.0-BETA.1.update
+│   ├── TrueNAS-26.0.0-BETA.1.update.sha256
 │   ├── nvidia.raw
 │   └── nvidia.raw.sha256
 ```
