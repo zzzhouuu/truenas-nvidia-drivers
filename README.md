@@ -26,24 +26,20 @@ The build artifacts have been uploaded to the Cloudflare R2 storage. Public acce
 example:
 
 ```shell
-# 25.10.1
-wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.1/nvidia.raw
+# 25.10.2.1
+wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.2.1/nvidia.raw
 
-# 25.10.2
-wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.2/nvidia.raw
+# 25.10.3.1
+wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.3.1/nvidia.raw
+
+# 26.0.0-BETA.1
+wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/26.0.0-BETA.1/nvidia.raw
 ```
 
 ### tree structure of the artifacts
 
 ```shell
 .
-├── 25.10.1
-│   ├── TrueNAS-SCALE-25.10.1.update
-│   ├── TrueNAS-SCALE-25.10.1.update.sha256
-│   ├── build.log
-│   ├── manifest.json
-│   ├── nvidia.raw
-│   └── nvidia.raw.sha256
 ├── 25.10.2.1
 │   ├── TrueNAS-SCALE-25.10.2.1.update
 │   ├── TrueNAS-SCALE-25.10.2.1.update.sha256
@@ -51,11 +47,9 @@ wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.2/nvidia.raw
 │   ├── manifest.json
 │   ├── nvidia.raw
 │   └── nvidia.raw.sha256
-├── 25.10.3
-│   ├── TrueNAS-SCALE-25.10.3.update
-│   ├── TrueNAS-SCALE-25.10.3.update.sha256
-│   ├── build.log
-│   ├── manifest.json
+├── 25.10.3.1
+│   ├── TrueNAS-SCALE-25.10.3.1.update
+│   ├── TrueNAS-SCALE-25.10.3.1.update.sha256
 │   ├── nvidia.raw
 │   └── nvidia.raw.sha256
 ├── 26.0.0-BETA.1
