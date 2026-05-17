@@ -5,7 +5,7 @@ A build framework for TrueNAS SCALE.
 ## Usage
 
 ```bash
-wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.2/nvidia.raw
+wget -O /tmp/nvidia.raw https://truenas-drivers.zhouyou.info/25.10.3.1/nvidia.raw
 
 systemd-sysext unmerge
 zfs set readonly=off "$(zfs list -H -o name /usr)"
