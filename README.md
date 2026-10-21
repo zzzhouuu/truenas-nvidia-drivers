@@ -17,7 +17,7 @@ systemctl restart docker
 
 ## Patches
 
-- remove nvidia open source kernel module
+- build the proprietary NVIDIA kernel modules (`--kernel-module-type=proprietary`) instead of the open ones, so Maxwell/Pascal/Volta GPUs work (the R580 installer defaults to open when the flag is omitted)
 
 ## Artifacts
 
